@@ -1,0 +1,32 @@
+SELECT contact_name, city, country
+FROM customerssss
+ORDER BY
+CASE WHEN city IS NULL THEN contact_name END,
+CASE WHEN city IS NOT NULL THEN contact_name END,
+city;
+
+
+SELECT product_name, price,
+       CASE
+           WHEN price >= 100 THEN 'too expensive'
+           WHEN price >= 50 AND price < 100 THEN 'average'
+           WHEN price < 50 THEN 'low price'
+           END AS price_category
+FROM products;
+
+
+SELECT customer_name,
+       CASE
+           WHEN order_id IS NULL THEN 'no orders'
+           END AS order_status
+FROM customers
+         LEFT JOIN orders ON customers.customer_id = orders.customer_id
+WHERE order_id IS NULL;
+
+
+SELECT CONCAT(first_name, ' ', last_name) AS full_name,
+       CASE
+           WHEN position = 'Sales Representative' THEN 'Sales Stuff'
+           ELSE position
+           END AS job_title
+FROM employees;
